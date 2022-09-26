@@ -1,10 +1,10 @@
 import React from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 
-const CustomTextInput = (props) => (
+const CustomPasswordInput = (props) => (
     <View style={styles.container}>
         <Text style={styles.textLabel}>{props.label}</Text>
-        <TextInput style={[styles.textInput, { width: props.width }]}></TextInput>
+        <TextInput style={[styles.textInput, { width: props.width }]} secureTextEntry={true}></TextInput>
     </View>
 );
 
@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         marginTop: 10,
         alignItems: "center",
-        justifyContent: "space-between"
+        justifyContent: "space-between",
     },
     textLabel: {
         fontSize: 14,
@@ -28,4 +28,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default CustomTextInput;
+export default CustomPasswordInput;
