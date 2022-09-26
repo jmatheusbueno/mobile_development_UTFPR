@@ -8,15 +8,14 @@ const CreateAccount = () => {
     return (
         <View style={styles.container}>
             <CustomTextInput label="Nome completo" width={210} />
-            <CustomRadio 
-                options={['Masculino','Feminino']} 
-                horizontal={true} 
-                onChangeSelect={(opt, index) => {
-                    alert(opt);
-                    setSelected(index);
-                }}
-                selected={selected}
-            />
+            <View style={styles.radio}>
+                <CustomRadio 
+                    options={['Masculino','Feminino']} 
+                    horizontal={true} 
+                    onChangeSelect={(opt, index) => setSelected(index)}
+                    selected={selected}
+                />
+            </View>
         </View>
     )
 };
@@ -25,6 +24,10 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "#add4d0",
+    },
+    radio: {
+        marginTop: 5,
+        alignItems: 'center',
     },
 });
 
