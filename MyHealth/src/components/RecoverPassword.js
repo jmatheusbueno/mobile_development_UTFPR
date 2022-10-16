@@ -7,7 +7,7 @@ const RecoverPassword = () => {
     return (
         <View style={styles.container}>
             <CustomTextInput label="Email" width={340} />
-            <CustomButton value="Recuperar senha" backgroundColor="#49b976" width={200} />
+            <CustomButton value="Recuperar senha" backgroundColor="#49b976" width={200} marginTop={20} />
         </View>
     )
 };

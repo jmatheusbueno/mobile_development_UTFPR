@@ -21,7 +21,7 @@ const CreateAccount = () => {
             <CustomTextInput label="Email" width={275} />
             <CustomPasswordInput label="Senha" width={275} />
             <CustomPasswordInput label="Repetir senha" width={275} />
-            <CustomButton value="Cadastrar" backgroundColor="#49b976" width={120} />
+            <CustomButton value="Cadastrar" backgroundColor="#49b976" width={120} marginTop={50} />
         </View>
     )
 };
