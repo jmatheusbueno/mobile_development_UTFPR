@@ -14,7 +14,7 @@ const DrawerNavigator = (props) => {
             <Drawer.Navigator drawerContent={(props) => <CustomDrawerNavigator {...props} />}>
                 <Drawer.Screen name="Minhas Vacinas" component={Home}/>
                 <Drawer.Screen name="Próximas Vacinas" component={NextVaccine}/>
-                <Drawer.Screen name="FormVaccineData" component={FormVaccineData} />
+                <Drawer.Screen name="FormVaccineData" component={FormVaccineData} options={{drawerItemStyle: {display: 'none'} }} />
             </Drawer.Navigator>
         </NavigationContainer>
     )
