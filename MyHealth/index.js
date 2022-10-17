@@ -17,6 +17,6 @@ import App from './src/components/App'
 // AppRegistry.registerComponent(appName, () => CreateAccount);
 // AppRegistry.registerComponent(appName, () => RecoverPassword);
 // AppRegistry.registerComponent(appName, () => Home);
-//AppRegistry.registerComponent(appName, () => FormVaccineData);
+// AppRegistry.registerComponent(appName, () => FormVaccineData);
 // AppRegistry.registerComponent(appName, () => NextVaccine);
 AppRegistry.registerComponent(appName, () => App);

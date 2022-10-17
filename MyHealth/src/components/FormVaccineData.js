@@ -5,8 +5,10 @@ import CustomRadio from './general-components/CustomRadio';
 import CustomButton from './general-components/CustomButton';
 import CustomImageSelector from './general-components/CustomImageSelector';
 
-const FormVaccineData = () => {
+const FormVaccineData = (props) => {
     const [selected, setSelected] = useState(0);
+    
+    let isEdit = props.route.params !== undefined;
 
     return (
         <View style={styles.container}>
@@ -21,7 +23,8 @@ const FormVaccineData = () => {
                 />
             </View>
             <CustomImageSelector />
-            <CustomButton value="Cadastrar" backgroundColor="#49b976" width={120} marginTop={50} />
+            <CustomButton value={isEdit ? 'Editar' : 'Cadastrar'} backgroundColor="#49b976" width={120} marginTop={50} />
+            {isEdit && <CustomButton value="Excluir" backgroundColor="#FD7979" width={120} marginTop={50} />}
         </View>
     );
 };

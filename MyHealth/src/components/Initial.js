@@ -6,17 +6,7 @@ import CustomButton from "./general-components/CustomButton";
 import CustomTextInput from "./general-components/CustomTextInput";
 import CustomPasswordInput from "./general-components/CustomPasswordInput";
 
-const Initial = (props) => {
-    const goToHome = () => {
-        props.navigation.navigate('DrawerNavigator');
-    }
-    const goToCreateAccount = () => {
-        props.navigation.navigate('CreateAccount');
-    }
-    const goToRecoverPassword = () => {
-        props.navigation.navigate('RecoverPassword');
-    }
-    
+const Initial = (props) => {    
     return (
         <View style={styles.container}>
             <InitialTitle value="MyHealth" />
@@ -26,17 +16,26 @@ const Initial = (props) => {
                 <CustomPasswordInput label="Senha" width={300} />
             </View>
             <View style={styles.containerButtons}>
-                <TouchableOpacity onPress={goToHome}>
-                    <CustomButton value="Entrar" backgroundColor="#49b976" width={120} />
-                </TouchableOpacity>
+                <CustomButton 
+                    value="Entrar" 
+                    backgroundColor="#49b976" 
+                    width={120} 
+                    navigation={props.navigation} 
+                    navigate='DrawerNavigator' />
 
-                <TouchableOpacity onPress={goToCreateAccount}>
-                    <CustomButton value="Criar minha conta" backgroundColor="#419ed7" width={200}/>
-                </TouchableOpacity>
+                <CustomButton 
+                    value="Criar minha conta" 
+                    backgroundColor="#419ed7" 
+                    width={200} 
+                    navigation={props.navigation} 
+                    navigate='CreateAccount' />
 
-                <TouchableOpacity onPress={goToRecoverPassword}>
-                    <CustomButton value="Esqueci minha senha" backgroundColor="#b5c7d1" width={220} />
-                </TouchableOpacity>
+                <CustomButton 
+                    value="Esqueci minha senha" 
+                    backgroundColor="#b5c7d1" 
+                    width={220} 
+                    navigation={props.navigation} 
+                    navigate='RecoverPassword' />
             </View>
         </View>
     );

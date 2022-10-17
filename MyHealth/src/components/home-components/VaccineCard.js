@@ -1,23 +1,32 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Dimensions, Image } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const VaccineCard = (props) => {
 
     const {item} = props.item;
 
+    const { navigation } = props;
+    
+    const goToFormVaccineData = () => {
+        navigation.navigate('FormVaccineData', item);
+    }
+
     return (
-        <View style={styles.container}>
-            <Text style={styles.txt.title}>{item.name}</Text>
-            <View style={styles.viewDose}>
-                <Text style={styles.txt.dose}>{item.dose}</Text>
+        <TouchableOpacity onPress={goToFormVaccineData}>
+            <View style={styles.container}>
+                <Text style={styles.txt.title}>{item.name}</Text>
+                <View style={styles.viewDose}>
+                    <Text style={styles.txt.dose}>{item.dose}</Text>
+                </View>
+                <Text style={styles.txt.date}>{item.date}</Text>
+                <Image
+                    style={styles.img}
+                    source={{ uri: item.url }}
+                />
+                <Text style={styles.txt.nextDate}>Próxima dose em: {item.nextDate}</Text>
             </View>
-            <Text style={styles.txt.date}>{item.date}</Text>
-            <Image
-                style={styles.img}
-                source={{ uri: item.url }}
-            />
-            <Text style={styles.txt.nextDate}>Próxima dose em: {item.nextDate}</Text>
-        </View>
+        </TouchableOpacity>
     );
 };
 

@@ -36,18 +36,12 @@ const data = [
 ];
 
 const Home = (props) => {
-    const goToFormVaccineData = () => {
-        props.navigation.navigate('FormVaccineData');
-        console.log('ok')
-    }
 
     return (
         <View style={styles.container}>
-            <FlatList data={data} renderItem={(item) => <VaccineCard item={item}/>} numColumns={2} />
+            <FlatList data={data} renderItem={(item) => <VaccineCard item={item} navigation={props.navigation} />} numColumns={2}/>
             <View>
-                <TouchableOpacity onPress={goToFormVaccineData}>
-                    <CustomButton value="Nova Vacina" backgroundColor="#49b976" width={180} />
-                </TouchableOpacity>
+                <CustomButton value="Nova Vacina" backgroundColor="#49b976" width={180} navigation={props.navigation} navigate='FormVaccineData' />
             </View>
         </View>
     );
