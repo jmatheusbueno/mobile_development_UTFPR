@@ -8,7 +8,6 @@ import CustomPasswordInput from "./general-components/CustomPasswordInput";
 
 const Initial = (props) => {
     const goToHome = () => {
-        // props.navigation.navigate('Home');
         props.navigation.navigate('DrawerNavigator');
     }
     const goToCreateAccount = () => {

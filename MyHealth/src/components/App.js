@@ -6,6 +6,7 @@ import Initial from "./Initial";
 import CreateAccount from "./CreateAccount";
 import RecoverPassword from "./RecoverPassword";
 import DrawerNavigator from "./DrawerNavigator";
+import FormVaccineData from "./FormVaccineData";
 
 const Stack = createNativeStackNavigator();
 
@@ -15,7 +16,7 @@ const App = () => {
             <Stack.Navigator>
                 <Stack.Screen name="Initial" component={Initial} />
                 <Stack.Screen name="CreateAccount" component={CreateAccount} />
-                <Stack.Screen name="DrawerNavigator" component={DrawerNavigator} />
+                <Stack.Screen name="DrawerNavigator" component={DrawerNavigator} options={{ headerShown:false }} />
                 <Stack.Screen name="RecoverPassword" component={RecoverPassword} />
             </Stack.Navigator>
         </NavigationContainer>

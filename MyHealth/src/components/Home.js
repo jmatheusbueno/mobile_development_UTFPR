@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, FlatList } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import CustomButton from './general-components/CustomButton';
 import VaccineCard from './home-components/VaccineCard';
 
@@ -34,12 +35,19 @@ const data = [
     },
 ];
 
-const Home = () => {
+const Home = (props) => {
+    const goToFormVaccineData = () => {
+        props.navigation.navigate('FormVaccineData');
+        console.log('ok')
+    }
+
     return (
         <View style={styles.container}>
             <FlatList data={data} renderItem={(item) => <VaccineCard item={item}/>} numColumns={2} />
             <View>
-                <CustomButton value="Nova Vacina" backgroundColor="#49b976" width={180} />
+                <TouchableOpacity onPress={goToFormVaccineData}>
+                    <CustomButton value="Nova Vacina" backgroundColor="#49b976" width={180} />
+                </TouchableOpacity>
             </View>
         </View>
     );
