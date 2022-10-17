@@ -4,7 +4,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const VaccineCard = (props) => {
 
-    const {item} = props.item;
+    const { item } = props.item;
 
     const { navigation } = props;
     

@@ -19,6 +19,7 @@ const CustomButton = (props) => {
         </View>
     );
 };
+
 const styles = StyleSheet.create({
     buttonContainer: {
         alignItems: "center",
