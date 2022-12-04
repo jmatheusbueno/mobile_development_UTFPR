@@ -14,6 +14,7 @@ const Initial = (props) => {
 
     const login = () => {
         if (mail === password && mail === 'adm') {
+            console.log('Realizando Login como Administrador');
             props.navigation.navigate('DrawerNavigator');
             return;
         }

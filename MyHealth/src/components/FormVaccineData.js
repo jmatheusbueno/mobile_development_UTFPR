@@ -4,9 +4,31 @@ import CustomTextInput from './general-components/CustomTextInput';
 import CustomRadio from './general-components/CustomRadio';
 import CustomButton from './general-components/CustomButton';
 import CustomImageSelector from './general-components/CustomImageSelector';
+import { db } from '../configs/firebase';
+import { addDoc, collection } from 'firebase/firestore';
 
 const FormVaccineData = (props) => {
+    const { navigation } = props;
+
+    const [date, setDate] = useState('');
+    const [name, setName] = useState('');
     const [selected, setSelected] = useState(0);
+
+    const save = () => {
+        console.log('Salvando Vacina');
+        addDoc(collection(db, 'vaccine'), {
+            date: date,
+            name: name
+        })
+        .then((result) => {
+            console.log('Vacina criada', JSON.stringify(result));
+            navigation.navigate('Home');
+        })
+        .catch((reason) => {
+            console.log('Ocorreu um erro', JSON.stringify(reason));
+            alert(reason);
+        });
+    }
     
     let isEdit = props.route.params !== undefined;
     if (isEdit) {
@@ -16,6 +38,7 @@ const FormVaccineData = (props) => {
 
         return (
             <View style={styles.container}>
+                <CustomTextInput label="Data de vascinação" width={140} inputValue={props.route.params.date} />
                 <CustomTextInput label="Vacina" width={220} inputValue={props.route.params.name} />
                 <View style={styles.doseContainer}>
                     <Text style={{ color:'#fff' }}>Dose</Text>
@@ -34,7 +57,8 @@ const FormVaccineData = (props) => {
     } else {
         return (
             <View style={styles.container}>
-                <CustomTextInput label="Vacina" width={220} />
+                <CustomTextInput label="Data de vascinação" width={140} setValue={setDate}/>
+                <CustomTextInput label="Vacina" width={220} setValue={setName} />
                 <View style={styles.doseContainer}>
                     <Text style={{ color:'#fff' }}>Dose</Text>
                     <CustomRadio 
@@ -45,7 +69,13 @@ const FormVaccineData = (props) => {
                     />
                 </View>
                 <CustomImageSelector />
-                <CustomButton value={isEdit ? 'Editar' : 'Cadastrar'} backgroundColor="#49b976" width={120} marginTop={50} />
+                <CustomButton 
+                    value={isEdit ? 'Editar' : 'Cadastrar'} 
+                    backgroundColor="#49b976" 
+                    width={120} 
+                    marginTop={50} 
+                    func={save}
+                />
             </View>
         );
     }
