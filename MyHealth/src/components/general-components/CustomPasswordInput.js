@@ -1,12 +1,16 @@
-import React from "react";
+import React, {useState} from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 
-const CustomPasswordInput = (props) => (
-    <View style={styles.container}>
-        <Text style={styles.textLabel}>{props.label}</Text>
-        <TextInput style={[styles.textInput, { width: props.width }]} secureTextEntry={true}></TextInput>
-    </View>
-);
+const CustomPasswordInput = (props) => {
+    const { setValue } = props;
+    
+    return (
+        <View style={styles.container}>
+            <Text style={styles.textLabel}>{props.label}</Text>
+            <TextInput style={[styles.textInput, { width: props.width }]} secureTextEntry={true} onChangeText={setValue}></TextInput>
+        </View>
+    );
+};
 
 const styles = StyleSheet.create({
     container: {

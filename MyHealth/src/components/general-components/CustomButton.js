@@ -3,12 +3,13 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 const CustomButton = (props) => {
 
-    const { navigation, navigate } = props;
+    const { navigation, navigate, func } = props;
 
     const goToNavigation = () => {
-        if (!navigation || !navigate) 
-            return;
-        navigation.navigate(navigate);
+        if (func) 
+            func();       
+        else if (navigation && navigate) 
+            navigation.navigate(navigate);
     }
 
     return (

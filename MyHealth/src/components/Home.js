@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, FlatList } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { TextInput } from 'react-native-gesture-handler';
 import CustomButton from './general-components/CustomButton';
 import VaccineCard from './home-components/VaccineCard';
 
@@ -39,9 +39,12 @@ const Home = (props) => {
 
     return (
         <View style={styles.container}>
+            <View style={{marginVertical: 5}}>
+                <TextInput placeholder='Pesquisar Vacina...' placeholderTextColor="black" style={styles.search}></TextInput>
+            </View>
             <FlatList data={data} renderItem={(item) => <VaccineCard item={item} navigation={props.navigation} />} numColumns={2}/>
             <View>
-                <CustomButton value="Nova Vacina" backgroundColor="#49b976" width={180} navigation={props.navigation} navigate='FormVaccineData' />
+                <CustomButton value="Nova Vacinaa" backgroundColor="#49b976" width={180} navigation={props.navigation} navigate='FormVaccineData' />
             </View>
         </View>
     );
@@ -52,6 +55,11 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: "#add4d0",
         padding: 10,
+    },
+    search: {
+        backgroundColor: '#fff',
+        color: 'black',
+        height: 40,
     },
 });
 

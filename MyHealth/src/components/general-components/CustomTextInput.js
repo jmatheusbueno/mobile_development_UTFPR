@@ -2,12 +2,12 @@ import React, {useState} from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 
 const CustomTextInput = (props) => {
-    const [inputValue, setInputValue] = useState(props.inputValue ?? '');
+    const { setValue } = props;
 
     return (
         <View style={styles.container}>
             <Text style={styles.textLabel}>{props.label}</Text>
-            <TextInput style={[styles.textInput, { width: props.width }]}>{props.inputValue ?? ''}</TextInput>
+            <TextInput style={[styles.textInput, { width: props.width }]} onChangeText={setValue}></TextInput>
         </View>
     );
 };
