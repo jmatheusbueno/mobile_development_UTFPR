@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import CustomTextInput from './general-components/CustomTextInput';
 import CustomRadio from './general-components/CustomRadio';
 import CustomButton from './general-components/CustomButton';
 import CustomImageSelector from './general-components/CustomImageSelector';
+
 import { db } from '../configs/firebase';
-import { addDoc, collection } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, getDoc, updateDoc } from 'firebase/firestore';
 
 const FormVaccineData = (props) => {
     const { navigation } = props;
@@ -14,11 +15,26 @@ const FormVaccineData = (props) => {
     const [name, setName] = useState('');
     const [selected, setSelected] = useState(0);
 
+    useEffect(() => {
+        if (props.route.params?.id) {
+            getDoc(doc(db, "vaccine", props.route.params.id))
+            .then((result) => {
+                setDate(result.data().date);
+                setName(result.data().name);
+                setSelected(result.data().selected);
+            })
+            .catch((reason) => {
+                console.log('Ocorreu um erro', JSON.stringify(reason));
+            });
+        }
+    });
+
     const save = () => {
         console.log('Salvando Vacina');
         addDoc(collection(db, 'vaccine'), {
             date: date,
-            name: name
+            name: name,
+            dose: selected,
         })
         .then((result) => {
             console.log('Vacina criada', JSON.stringify(result));
@@ -28,6 +44,30 @@ const FormVaccineData = (props) => {
             console.log('Ocorreu um erro', JSON.stringify(reason));
             alert(reason);
         });
+    }
+
+    const update = () => {
+        updateDoc(doc(db, "vaccine", props.route.params.id), {
+            date: date,
+            name: name,
+            dose: selected
+        })
+        .then((result) => {
+            navigation.navigate('Home');
+        })
+        .catch((reason) => {
+            console.log('Ocorreu um erro', JSON.stringify(reason));
+        })
+    }
+
+    const remove = () => {
+        deleteDoc(doc(db, "vaccine", props.route.params.id))
+        .then(() => {
+            navigation.navigate('Home');
+        })
+        .catch((reason) => {
+            console.log('Ocorreu um erro', JSON.stringify(reason));
+        })
     }
     
     let isEdit = props.route.params !== undefined;
@@ -50,8 +90,21 @@ const FormVaccineData = (props) => {
                     />
                 </View>
                 <CustomImageSelector />
-                <CustomButton value={isEdit ? 'Editar' : 'Cadastrar'} backgroundColor="#49b976" width={120} marginTop={50} />
-                {isEdit && <CustomButton value="Excluir" backgroundColor="#FD7979" width={120} marginTop={50} />}
+                <CustomButton 
+                    value={isEdit ? 'Editar' : 'Cadastrar'} 
+                    backgroundColor="#49b976" 
+                    width={120} 
+                    marginTop={50} 
+                    func={update}
+                />
+                {isEdit &&
+                    <CustomButton 
+                        value="Excluir" 
+                        backgroundColor="#FD7979" 
+                        width={120}
+                        marginTop={50} 
+                        func={remove}
+                    />}
             </View>
         );
     } else {

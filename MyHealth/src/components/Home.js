@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, FlatList } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import CustomButton from './general-components/CustomButton';
 import VaccineCard from './home-components/VaccineCard';
+
+import { db } from '../configs/firebase';
+import { collection, doc, onSnapshot, query } from 'firebase/firestore';
 
 const data = [
     {
@@ -37,14 +40,36 @@ const data = [
 
 const Home = (props) => {
 
+    const [searchString, setsearchString] = useState(''); 
+    const [vaccines, setVaccines] = useState([]); 
+
+    const q = query(collection(db, "vaccine"));
+    useEffect(() => {
+        onSnapshot(q, (result) => {
+            const listVaccines = [];
+            result.forEach((vaccine) => {
+                listVaccines.push({
+                    id: doc.id,
+                    name: vaccine.data().name,
+                    dose: vaccine.data().dose,
+                    date: vaccine.data().date,
+                    url: vaccine.data().url,
+                    nextDate: vaccine.data().nextDate,
+                });
+            });
+
+            setVaccines(listVaccines);
+        });
+    }, []);
+
     return (
         <View style={styles.container}>
             <View style={{marginVertical: 5}}>
-                <TextInput placeholder='Pesquisar Vacina...' placeholderTextColor="black" style={styles.search}></TextInput>
+                <TextInput placeholder='Pesquisar Vacina...' placeholderTextColor="black" style={styles.search} value={searchString} onChangeText={setsearchString}></TextInput>
             </View>
-            <FlatList data={data} renderItem={(item) => <VaccineCard item={item} navigation={props.navigation} />} numColumns={2}/>
+            <FlatList data={vaccines.filter(dt => dt.name.includes(searchString))} renderItem={(item) => <VaccineCard item={item} navigation={props.navigation} />} numColumns={2} keyExtractor={item => item.id} />
             <View>
-                <CustomButton value="Nova Vacinaa" backgroundColor="#49b976" width={180} navigation={props.navigation} navigate='FormVaccineData' />
+                <CustomButton value="Nova Vacina" backgroundColor="#49b976" width={180} navigation={props.navigation} navigate='FormVaccineData' />
             </View>
         </View>
     );
