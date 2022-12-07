@@ -35,6 +35,7 @@ const FormVaccineData = (props) => {
             date: date,
             name: name,
             dose: selected,
+            nextDate: date,
         })
         .then((result) => {
             console.log('Vacina criada', JSON.stringify(result));
@@ -50,7 +51,8 @@ const FormVaccineData = (props) => {
         updateDoc(doc(db, "vaccine", props.route.params.id), {
             date: date,
             name: name,
-            dose: selected
+            dose: selected,
+            nextDate: date,
         })
         .then((result) => {
             navigation.navigate('Home');

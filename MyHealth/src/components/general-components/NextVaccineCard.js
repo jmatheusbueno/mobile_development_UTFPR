@@ -2,10 +2,12 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
 const NextVaccineCard = (props) => {
+    const { item } = props.item;
+
     return (
         <View style={styles.container}>
-            <Text style={styles.txtName}>{props.name}</Text>
-            <Text style={styles.txtDate}>{props.date}</Text>
+            <Text style={styles.txtName}>{item.name}</Text>
+            <Text style={styles.txtDate}>{item.nextDate}</Text>
         </View>
     );
 };
