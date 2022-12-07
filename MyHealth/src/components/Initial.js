@@ -5,14 +5,22 @@ import InitialSubtitle from "./initial-components/InitialSubtitle"
 import CustomButton from "./general-components/CustomButton";
 import CustomTextInput from "./general-components/CustomTextInput";
 import CustomPasswordInput from "./general-components/CustomPasswordInput";
+
 import { auth } from "../configs/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
+
+import { useDispatch } from 'react-redux';
+import { reducerSetLogin } from "../redux/loginSlice";
 
 const Initial = (props) => {
     const [mail, setMail] = useState('');
     const [password, setPassword] = useState('');
 
+    const dispatch = useDispatch();
+
     const login = () => {
+        dispatch(reducerSetLogin({mail: mail, password: password}));
+
         if (mail === password && mail === 'adm') {
             console.log('Realizando Login como Administrador');
             props.navigation.navigate('DrawerNavigator');

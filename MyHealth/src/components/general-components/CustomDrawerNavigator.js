@@ -1,11 +1,16 @@
 import { DrawerContentScrollView, DrawerItem, DrawerItemList } from "@react-navigation/drawer";
 import { View, StyleSheet, Text } from "react-native";
 
+import { useSelector } from "react-redux";
+
 const CustomDrawerNavigator = (props) => {
+
+    const mail = useSelector((state) => state.login.mail);
+
     return (
         <DrawerContentScrollView {...props} style={styles.container}>
             <View style={styles.containerView}>
-                <Text style={styles.txt}>Olá Jurandir</Text>
+                <Text style={styles.txt}>{mail}</Text>
             </View>
             <DrawerItemList {...props} />
             <DrawerItem label='Sair'></DrawerItem>
